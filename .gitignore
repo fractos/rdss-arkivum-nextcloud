@@ -1,0 +1,6 @@
+*~
+*#
+*.swp
+
+# Ignore build files
+build/
