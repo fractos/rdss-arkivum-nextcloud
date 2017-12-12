@@ -19,7 +19,7 @@ export ADMIN_PASSWORD="${ADMIN_PASSWORD:-'admin'}"
 cp '/usr/local/bin/base-setup.sh' '/usr/local/bin/base-setup.sh.orig' && \
 < '/usr/local/bin/base-setup.sh.orig' \
     tr '\n' '\r' | \
-    sed "s|EOF\\rif \\[|  'dbport'        => '\\${DB_PORT}',\\rEOF\\rif \\[|" | \
+    sed "s|EOF\\rif \\[|  'dbport'        => '\${DB_PORT}',\\rEOF\\rif \\[|" | \
     tr '\r' '\n' > '/usr/local/bin/base-setup.sh'
 
 # Base install runs auto-install in background. but we want it in foreground so
