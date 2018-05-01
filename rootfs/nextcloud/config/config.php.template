@@ -49,10 +49,10 @@ $CONFIG = array (
   'updatechecker' => false,
 
   # Database
-  'dbtype' => 'mysql',
+  'dbtype' => getenv('DB_TYPE') ?: 'mysql',
   'dbtableprefix' => 'oc_',
-  'dbuser' => '${NC_DB_USER}',
-  'dbpassword' => '${NC_DB_PASSWORD_CRYPTED}',
+  'dbuser' => getenv('DB_USER') ?: 'archivematica',
+  'dbpassword' => getenv('DB_PASSWORD') ?: 'demo',
 
   # Caching
   'memcache.local' => '\OC\Memcache\APCu',
