@@ -62,8 +62,6 @@ cp -pr /apps2 /var/lib/nextcloud/ && \
 
 # STAGE 4: POST-CONFIG BOOTSTRAP ###############################################
 
-occ upgrade
-
 # Enable 'External Storage' plugin
 occ "app:enable files_external"
 
