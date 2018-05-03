@@ -54,6 +54,13 @@ cp -pr /apps2 /var/lib/nextcloud/ && \
     cp -p /var/lib/nextcloud/config/config.php \
         /var/lib/nextcloud/config/config.php.default
 
+# Customise the size of the db transactions for the file scan
+cp '/nextcloud/lib/private/Files/Utils/Scanner.php' '/nextcloud/lib/private/Files/Utils/Scanner.php.orig' && \
+< '/nextcloud/lib/private/Files/Utils/Scanner.php.orig' \
+    tr '\n' '\r' | \
+    sed -r "s|MAX_ENTRIES_TO_COMMIT = 10000|MAX_ENTRIES_TO_COMMIT = ${MAX_ENTRIES_TO_COMMIT}|" | \
+    tr '\r' '\n' > '/nextcloud/lib/private/Files/Utils/Scanner.php'
+
 #
 # Replace the default config with our own templated config, keeping any
 # auto-generated values like instance id and password salt etc.
@@ -62,11 +69,13 @@ cp -pr /apps2 /var/lib/nextcloud/ && \
 
 # STAGE 4: POST-CONFIG BOOTSTRAP ###############################################
 
+occ upgrade
+
 # Enable 'External Storage' plugin
-occ "app:enable files_external"
+occ app:enable files_external
 
 # Enable 'Files Move' plugin
-occ "app:enable files_mv"
+occ app:enable files_mv
 
 # Create requested external storage locations
 for storage in ${EXTERNAL_STORAGES} ; do

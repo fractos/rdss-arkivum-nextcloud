@@ -87,5 +87,6 @@ $CONFIG = array (
   # Miscellaneous
   'filesystem_check_changes' => 1,
   'overwrite.cli.url' => 'http://localhost',
+  'filelocking.enabled' => false,
 );
 ?>
